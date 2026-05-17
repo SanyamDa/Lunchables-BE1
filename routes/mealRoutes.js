@@ -1,7 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { generateWeek } = require('../logic/weekGenerator');
+const { generateWeekAI } = require('../logic/aiWeekGenerator');
+
 
 const router = express.Router();
 const MEALS_FILE = path.join(__dirname, '..', 'data', 'meals.json');
@@ -34,9 +35,9 @@ router.post('/meals', (req, res) => {
 });
 
 // POST /api/generate-week — return a 14-meal plan
-router.post('/generate-week', (req, res) => {
+router.post('/generate-week', async(req, res) => {
   const meals = readMeals();
-  const week = generateWeek(meals);
+  const week = await generateWeekAI(meals);
   res.json(week);
 });
 
