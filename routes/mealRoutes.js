@@ -22,12 +22,12 @@ router.get('/meals', (req, res) => {
 
 // POST /api/meals — add a new meal
 router.post('/meals', (req, res) => {
-  const { name, cuisine, style, main_ingredient } = req.body;
-  if (!name || !cuisine || !style || !main_ingredient) {
-    return res.status(400).json({ error: 'Missing required fields' });
+  const { name, cuisine, style, meal_type, frequency_per_month } = req.body;
+  if (!name || !cuisine || !style || !Array.isArray(meal_type) || typeof frequency_per_month !== 'number') {
+    return res.status(400).json({ error: 'Missing or invalid fields' });
   }
   const meals = readMeals();
-  const newMeal = { name, cuisine, style, main_ingredient };
+  const newMeal = { name, cuisine, style, meal_type, frequency_per_month };
   meals.push(newMeal);
   writeMeals(meals);
   res.status(201).json(newMeal);
@@ -40,4 +40,4 @@ router.post('/generate-week', (req, res) => {
   res.json(week);
 });
 
-module.exports = route
+module.exports = router;
