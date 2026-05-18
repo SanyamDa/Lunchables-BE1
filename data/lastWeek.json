@@ -1,86 +1,14 @@
 {
   "monday-lunch": {
-    "name": "Bhindi with Roti",
-    "cuisine": "Indian",
-    "style": "Light",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 4
-  },
-  "monday-dinner": {
-    "name": "Dal Chawal (Rice)",
-    "cuisine": "Indian",
-    "style": "Light",
-    "meal_type": [
-      "Dinner"
-    ],
-    "frequency_per_month": 3
-  },
-  "tuesday-lunch": {
-    "name": "Thua Protein Rice",
-    "cuisine": "Thai",
-    "style": "Light",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 5
-  },
-  "tuesday-dinner": {
-    "name": "Paneer Paratha",
-    "cuisine": "Indian",
-    "style": "Heavy",
-    "meal_type": [
-      "Dinner"
-    ],
-    "frequency_per_month": 3
-  },
-  "wednesday-lunch": {
-    "name": "Aloo Paratha",
+    "name": "Dal Makhni",
     "cuisine": "Indian",
     "style": "Heavy",
     "meal_type": [
       "Lunch"
-    ],
-    "frequency_per_month": 3
-  },
-  "wednesday-dinner": {
-    "name": "Mixed Vegetable with Rice",
-    "cuisine": "Thai",
-    "style": "Light",
-    "meal_type": [
-      "Dinner"
-    ],
-    "frequency_per_month": 5
-  },
-  "thursday-lunch": {
-    "name": "Paneer with Roti",
-    "cuisine": "Indian",
-    "style": "Heavy",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 3
-  },
-  "thursday-dinner": {
-    "name": "Vegetable Chowmein",
-    "cuisine": "Chinese",
-    "style": "Heavy",
-    "meal_type": [
-      "Dinner"
     ],
     "frequency_per_month": 2
   },
-  "friday-lunch": {
-    "name": "Idli with Sambhar",
-    "cuisine": "Indian",
-    "style": "Light",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 1
-  },
-  "friday-dinner": {
+  "monday-dinner": {
     "name": "Tofu with Rice",
     "cuisine": "Thai",
     "style": "Light",
@@ -89,26 +17,8 @@
     ],
     "frequency_per_month": 5
   },
-  "saturday-lunch": {
-    "name": "Chola Bhatura",
-    "cuisine": "Indian",
-    "style": "Heavy",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 2
-  },
-  "saturday-dinner": {
-    "name": "Pesto Pasta",
-    "cuisine": "Italian",
-    "style": "Heavy",
-    "meal_type": [
-      "Dinner"
-    ],
-    "frequency_per_month": 2
-  },
-  "sunday-lunch": {
-    "name": "Aloo with Roti",
+  "tuesday-lunch": {
+    "name": "Aloo Paratha",
     "cuisine": "Indian",
     "style": "Heavy",
     "meal_type": [
@@ -116,13 +26,103 @@
     ],
     "frequency_per_month": 3
   },
-  "sunday-dinner": {
-    "name": "Khao Pad with Rice",
-    "cuisine": "Thai",
+  "tuesday-dinner": {
+    "name": "Vegetable Chowmein",
+    "cuisine": "Chinese",
     "style": "Heavy",
     "meal_type": [
       "Dinner"
     ],
+    "frequency_per_month": 2
+  },
+  "wednesday-lunch": {
+    "name": "Bhindi with Roti",
+    "cuisine": "Indian",
+    "style": "Light",
+    "meal_type": [
+      "Lunch"
+    ],
+    "frequency_per_month": 4
+  },
+  "wednesday-dinner": {
+    "name": "Galic Bread",
+    "cuisine": "Indian",
+    "style": "Heavy",
+    "meal_type": [
+      "Dinner"
+    ],
+    "frequency_per_month": 3
+  },
+  "thursday-lunch": {
+    "name": "Masala Pav",
+    "cuisine": "Indian",
+    "style": "Heavy",
+    "meal_type": [
+      "Lunch"
+    ],
+    "frequency_per_month": 3
+  },
+  "thursday-dinner": {
+    "name": "Mixed Vegetable with Rice",
+    "cuisine": "Thai",
+    "style": "Light",
+    "meal_type": [
+      "Dinner"
+    ],
     "frequency_per_month": 5
+  },
+  "friday-lunch": {
+    "name": "Corn with Roti",
+    "cuisine": "Indian",
+    "style": "Heavy",
+    "meal_type": [
+      "Lunch"
+    ],
+    "frequency_per_month": 3
+  },
+  "friday-dinner": {
+    "name": "Palak Paneer with Roti",
+    "cuisine": "Indian",
+    "style": "Heavy",
+    "meal_type": [
+      "Dinner"
+    ],
+    "frequency_per_month": 3
+  },
+  "saturday-lunch": {
+    "name": "Aloo Sandwich",
+    "cuisine": "Indian",
+    "style": "Light",
+    "meal_type": [
+      "Lunch"
+    ],
+    "frequency_per_month": 3
+  },
+  "saturday-dinner": {
+    "name": "Corn Sandwich",
+    "cuisine": "Indian",
+    "style": "Light",
+    "meal_type": [
+      "Dinner"
+    ],
+    "frequency_per_month": 3
+  },
+  "sunday-lunch": {
+    "name": "Idli with Sambhar",
+    "cuisine": "Indian",
+    "style": "Light",
+    "meal_type": [
+      "Lunch"
+    ],
+    "frequency_per_month": 1
+  },
+  "sunday-dinner": {
+    "name": "Dal Chawal (Rice)",
+    "cuisine": "Indian",
+    "style": "Light",
+    "meal_type": [
+      "Dinner"
+    ],
+    "frequency_per_month": 3
   }
 }
