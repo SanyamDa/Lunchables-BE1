@@ -1,14 +1,14 @@
 {
-  "saturday-dinner": {
-    "name": "Kuay Teow Naam",
-    "cuisine": "Thai",
-    "style": "Heavy",
+  "monday-lunch": {
+    "name": "Bhindi with Roti",
+    "cuisine": "Indian",
+    "style": "Light",
     "meal_type": [
-      "Dinner"
+      "Lunch"
     ],
-    "frequency_per_month": 2
+    "frequency_per_month": 4
   },
-  "sunday-dinner": {
+  "monday-dinner": {
     "name": "Dal Chawal (Rice)",
     "cuisine": "Indian",
     "style": "Light",
@@ -16,43 +16,6 @@
       "Dinner"
     ],
     "frequency_per_month": 3
-  },
-  "saturday-lunch": {
-    "name": "Lapheto Rice",
-    "cuisine": "Burmese",
-    "style": "Light",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 7
-  },
-  "sunday-lunch": {
-    "name": "Lapheto Rice",
-    "cuisine": "Burmese",
-    "style": "Light",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 7
-  },
-  "monday-lunch": {
-    "name": "Thua Protein Rice",
-    "cuisine": "Thai",
-    "style": "Light",
-    "meal_type": [
-      "Lunch"
-    ],
-    "frequency_per_month": 5
-  },
-  "monday-dinner": {
-    "name": "Idli with Sambhar",
-    "cuisine": "Indian",
-    "style": "Light",
-    "meal_type": [
-      "Lunch",
-      "Dinner"
-    ],
-    "frequency_per_month": 1
   },
   "tuesday-lunch": {
     "name": "Thua Protein Rice",
@@ -64,16 +27,16 @@
     "frequency_per_month": 5
   },
   "tuesday-dinner": {
-    "name": "Pesto Pasta",
-    "cuisine": "Italian",
+    "name": "Paneer Paratha",
+    "cuisine": "Indian",
     "style": "Heavy",
     "meal_type": [
       "Dinner"
     ],
-    "frequency_per_month": 2
+    "frequency_per_month": 3
   },
   "wednesday-lunch": {
-    "name": "Aloo with Roti",
+    "name": "Aloo Paratha",
     "cuisine": "Indian",
     "style": "Heavy",
     "meal_type": [
@@ -82,13 +45,13 @@
     "frequency_per_month": 3
   },
   "wednesday-dinner": {
-    "name": "Manchurian Rice",
-    "cuisine": "Chinese",
+    "name": "Mixed Vegetable with Rice",
+    "cuisine": "Thai",
     "style": "Light",
     "meal_type": [
       "Dinner"
     ],
-    "frequency_per_month": 1
+    "frequency_per_month": 5
   },
   "thursday-lunch": {
     "name": "Paneer with Roti",
@@ -100,6 +63,24 @@
     "frequency_per_month": 3
   },
   "thursday-dinner": {
+    "name": "Vegetable Chowmein",
+    "cuisine": "Chinese",
+    "style": "Heavy",
+    "meal_type": [
+      "Dinner"
+    ],
+    "frequency_per_month": 2
+  },
+  "friday-lunch": {
+    "name": "Idli with Sambhar",
+    "cuisine": "Indian",
+    "style": "Light",
+    "meal_type": [
+      "Lunch"
+    ],
+    "frequency_per_month": 1
+  },
+  "friday-dinner": {
     "name": "Tofu with Rice",
     "cuisine": "Thai",
     "style": "Light",
@@ -108,8 +89,26 @@
     ],
     "frequency_per_month": 5
   },
-  "friday-lunch": {
-    "name": "Aloo Paratha",
+  "saturday-lunch": {
+    "name": "Chola Bhatura",
+    "cuisine": "Indian",
+    "style": "Heavy",
+    "meal_type": [
+      "Lunch"
+    ],
+    "frequency_per_month": 2
+  },
+  "saturday-dinner": {
+    "name": "Pesto Pasta",
+    "cuisine": "Italian",
+    "style": "Heavy",
+    "meal_type": [
+      "Dinner"
+    ],
+    "frequency_per_month": 2
+  },
+  "sunday-lunch": {
+    "name": "Aloo with Roti",
     "cuisine": "Indian",
     "style": "Heavy",
     "meal_type": [
@@ -117,13 +116,13 @@
     ],
     "frequency_per_month": 3
   },
-  "friday-dinner": {
-    "name": "Macaroni",
-    "cuisine": "Italian",
-    "style": "Light",
+  "sunday-dinner": {
+    "name": "Khao Pad with Rice",
+    "cuisine": "Thai",
+    "style": "Heavy",
     "meal_type": [
       "Dinner"
     ],
-    "frequency_per_month": 2
+    "frequency_per_month": 5
   }
 }

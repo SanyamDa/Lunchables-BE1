@@ -1,4 +1,4 @@
-const Anthropic = require('@anthropic-ai/sdk');
+const OpenAI = require('openai');
 const fs = require('fs');
 const path = require('path');
 
@@ -15,34 +15,33 @@ function saveLastWeek(plan) {
   fs.writeFileSync(LAST_WEEK_FILE, JSON.stringify(plan, null, 2));
 }
 
+const mealSchema = {
+  type: 'object',
+  properties: {
+    name:                 { type: 'string' },
+    cuisine:              { type: 'string' },
+    style:                { type: 'string' },
+    meal_type:            { type: 'array', items: { type: 'string' } },
+    frequency_per_month:  { type: 'number' }
+  },
+  required: ['name', 'cuisine', 'style', 'meal_type', 'frequency_per_month'],
+  additionalProperties: false
+};
+
 const weekPlanSchema = {
   type: 'object',
-  properties: Object.fromEntries(SLOTS.map(s => [s, { '$ref': '#/$defs/meal' }])),
+  properties: Object.fromEntries(SLOTS.map(s => [s, mealSchema])),
   required: SLOTS,
-  additionalProperties: false,
-  '$defs': {
-    meal: {
-      type: 'object',
-      properties: {
-        name: { type: 'string' },
-        cuisine: { type: 'string' },
-        style: { type: 'string' },
-        meal_type: { type: 'array', items: { type: 'string' } },
-        frequency_per_month: { type: 'number' }
-      },
-      required: ['name', 'cuisine', 'style', 'meal_type', 'frequency_per_month'],
-      additionalProperties: false
-    }
-  }
+  additionalProperties: false
 };
 
 async function generateWeekAI(meals) {
-  const client = new Anthropic();
+  const client = new OpenAI();
   const lastWeek = readLastWeek();
   const lunchMeals = meals.filter(m => m.meal_type.includes('Lunch'));
   const dinnerMeals = meals.filter(m => m.meal_type.includes('Dinner'));
 
-  const prompt = `You are a meal planner. Choose meals for each slot in a weekly plan.
+  const prompt = `You are a deterministic, zero-hallucination meal scheduling engine. Your absolute priority is structural accuracy and adherence to logic, not creativity. Your task is to generate a realistic 14-meal weekly schedule (Lunch and Dinner for 7 days) using ONLY the provided household dataset.
 
 Available meals (choose ONLY from this list, return the complete meal object):
 
@@ -52,33 +51,49 @@ ${JSON.stringify(lunchMeals, null, 2)}
 DINNER options:
 ${JSON.stringify(dinnerMeals, null, 2)}
 
-Rules:
-1. Lunch slots must use a meal from LUNCH options; dinner slots from DINNER options
-2. A meal with frequency_per_month N can appear at most ceil(N/4) times (minimum 1)
-3. Avoid the same cuisine for both meals on the same day
-4. Avoid the same cuisine as the previous day's dinner
-5. At most 6 Heavy-style meals total across the week
-6. No two Heavy-style meals on the same day
-7. Maximize variety — spread different cuisines across the week
-${lastWeek ? `8. Avoid repeating these meals on Monday and Tuesday (served last weekend):
-   Saturday lunch: ${lastWeek['saturday-lunch']?.name}
-   Saturday dinner: ${lastWeek['saturday-dinner']?.name}
-   Sunday lunch: ${lastWeek['sunday-lunch']?.name}
-   Sunday dinner: ${lastWeek['sunday-dinner']?.name}` : ''}
+
+You must build the schedule by strictly applying the following four algorithmic layers:
+
+LAYER 1: THE 72-HOUR COOLDOWN RULE (MAXIMUM PRIORITY)
+- Once a specific dish is scheduled for a meal slot, that EXACT dish is completely locked and CANNOT be used again for the next 7 consecutive meal slots (which equals 72 hours).
+- Example: If "Dosa" is chosen for Monday Lunch, it is banned from Monday Dinner, Tuesday Lunch/Dinner, Wednesday Lunch/Dinner, and Thursday Lunch. It can only reappear on Thursday Dinner at the earliest.
+
+LAYER 2: STRICT CONSECUTIVE DAY & CUISINE BLOCKERS
+- No Back-to-Back Cuisines: You cannot schedule the same cuisine for consecutive meal slots. If Monday Dinner is Indian, Tuesday Lunch CANNOT be Indian.
+- No Same-Day Cuisine Clashes: Lunch and Dinner on the exact same day must always be different cuisines (e.g., you cannot have Thai for both lunch and dinner on Friday).
+
+LAYER 3: HEALTH & STYLE BALANCE RULES
+- Daily Equilibrium: Every single day MUST have exactly one "Light" meal and one "Heavy" meal. You are strictly forbidden from scheduling two "Heavy" meals or two "Light" meals on the same day. 
+- Weekly Cap: Across the entire 14-meal schedule, you are capped at a maximum of 6 "Heavy" meals total. 
+- Meal Type Restrictions: Ensure that dishes assigned to a slot match the allowed values in their "meal_type" array from the dataset (e.g., do not put a Dinner-only dish into a Lunch slot).
+
+LAYER 4: PROBABILITY WEIGHTING (FREQUENCY PER MONTH)
+- You must mathematically favor dishes with a higher "frequency_per_month" value. A dish with a value of 8 should appear roughly 4 times more often over a monthly cycle than a dish with a value of 2. 
+- However, the 72-hour cooldown rule and the Cuisine blockers ALWAYS take absolute priority over frequency. If a high-frequency dish breaks a rule, it must be skipped.
+
+GENERATION PROCESS:
+To ensure accuracy, execute a Multi-Pass Strategy internally:
+1. Pass 1: Space out your highest-frequency staples (e.g., Dal Chawal) across the week first, ensuring they obey the 72-hour buffer.
+2. Pass 2: Fill the remaining vacant slots with lower-frequency items.
+3. Pass 3: Review the final matrix. If "Heavy" meals exceed 6, erase and rebuild.
 
 Return the complete meal object for every slot.`;
 
-  const response = await client.messages.create({
-    model: 'claude-haiku-4-5',
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o-mini',
     max_tokens: 4096,
-    output_config: {
-      format: { type: 'json_schema', schema: weekPlanSchema }
+    response_format: {
+      type: 'json_schema',
+      json_schema: {
+        name: 'week_plan',
+        schema: weekPlanSchema,
+        strict: true
+      }
     },
     messages: [{ role: 'user', content: prompt }]
   });
 
-  const text = response.content.find(b => b.type === 'text')?.text;
-  const plan = JSON.parse(text);
+  const plan = JSON.parse(response.choices[0].message.content);
   saveLastWeek(plan);
   return plan;
 }
