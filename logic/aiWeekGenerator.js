@@ -12,7 +12,8 @@ function readLastWeek() {
 }
 
 function saveLastWeek(plan) {
-  fs.writeFileSync(LAST_WEEK_FILE, JSON.stringify(plan, null, 2));
+  try { fs.writeFileSync(LAST_WEEK_FILE, JSON.stringify(plan, null, 2)); }
+  catch (e) { console.warn('Could not save lastWeek.json:', e.message); }
 }
 
 const mealSchema = {
@@ -59,7 +60,7 @@ LAYER 1: THE 72-HOUR COOLDOWN RULE (MAXIMUM PRIORITY)
 - Example: If "Dosa" is chosen for Monday Lunch, it is banned from Monday Dinner, Tuesday Lunch/Dinner, Wednesday Lunch/Dinner, and Thursday Lunch. It can only reappear on Thursday Dinner at the earliest.
 
 LAYER 2: STRICT CONSECUTIVE DAY & CUISINE BLOCKERS
-- No Back-to-Back Cuisines: You cannot schedule the same cuisine for consecutive meal slots. If Monday Dinner is Indian, Tuesday Lunch CANNOT be Indian.
+- No Bacdddk-to-Back Cuisines: You cannot schedule the same cuisine for consecutive meal slots. If Monday Dinner is Indian, Tuesday Lunch CANNOT be Indian.
 - No Same-Day Cuisine Clashes: Lunch and Dinner on the exact same day must always be different cuisines (e.g., you cannot have Thai for both lunch and dinner on Friday).
 
 LAYER 3: HEALTH & STYLE BALANCE RULES

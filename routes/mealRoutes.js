@@ -36,9 +36,14 @@ router.post('/meals', (req, res) => {
 
 // POST /api/generate-week — return a 14-meal plan
 router.post('/generate-week', async(req, res) => {
-  const meals = readMeals();
-  const week = await generateWeekAI(meals);
-  res.json(week);
+  try {
+    const meals = readMeals();
+    const week = await generateWeekAI(meals);
+    res.json(week);
+  } catch (err) {
+    console.error('generate-week error:', err);
+    res.status(500).json({ error: err.message || 'Failed to generate week' });
+  }
 });
 
 module.exports = router;

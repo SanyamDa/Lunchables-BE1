@@ -4,11 +4,10 @@ const cors = require('cors');
 const mealRoutes = require('./routes/mealRoutes');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());                 // let frontend on :3000 call us on :3001
-app.use(express.json());         // parse JSON request bodies into req.body
-
+app.use(express.json());         // parse JSON request bodies into req.bo
 app.use('/api', mealRoutes);     // anything starting with /api goes to mealRoutes
 
 app.get('/', (req, res) => {
